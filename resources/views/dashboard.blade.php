@@ -1,12 +1,11 @@
-<x-app-layout>
-    
-    <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-gray-600 shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <livewire:prank-call-simulator />
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+<!DOCTYPE html>
+<html>
+<head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <img src="{{ asset('public/images/prAInkcall.png') }}" alt="Logo" class="logo-class" />
+    <livewire:prank-call-simulator />
+</body>
+</html>

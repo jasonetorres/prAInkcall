@@ -3,36 +3,38 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'prAInk Call Simulator') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
+        <title>{{ config('app.name', 'Laravel') }}</title>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @livewireStyles
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-500">
-            <livewire:layout.navigation />
+    <body>
+        <nav class="navbar">
+            <div class="navbar-content">
+                <a href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                <div>
+                    @auth
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                            @csrf
+                            <button type="submit" style="background:none;border:none;color:#333;cursor:pointer;">Logout</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('register') }}">Register</a>
+                    @endauth
+                </div>
+            </div>
+        </nav>
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-        <script src="{{ asset('js/app.js') }}"></script>
+        <main class="main-content">
+            <div class="container">
+                <div class="card">
+                    @yield('content')
+                </div>
+            </div>
+        </main>
+        
         @livewireScripts
     </body>
 </html>
