@@ -9,24 +9,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <nav class="navbar">
-            <div class="navbar-content">
-                <a href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
-                <div>
-                    @auth
-                        <a href="{{ url('/dashboard') }}">Dashboard</a>
-                        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                            @csrf
-                            <button type="submit" style="background:none;border:none;color:#333;cursor:pointer;">Logout</button>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            </div>
-        </nav>
-
+        @include('livewire.layout.navigation') <!-- Updated navigation path -->
+        
         <main class="main-content">
             <div class="container">
                 <div class="card">
@@ -34,6 +18,10 @@
                 </div>
             </div>
         </main>
+        
+        <h1>Dashboard</h1>
+        <img src="{{ asset('path/to/logo.png') }}" alt="Logo" class="logo-class" />
+        <livewire:prank-call-simulator />
         
         @livewireScripts
     </body>

@@ -12,7 +12,8 @@ class Logout
      */
     public function __invoke(): void
     {
-        Auth::guard('web')->logout();
+        // Ensure the correct guard is used
+        Auth::logout(); // Changed from Auth::guard('web')->logout();
 
         Session::invalidate();
         Session::regenerateToken();
